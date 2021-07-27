@@ -1,0 +1,251 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="newdata.length > 0">
+      
+    
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef> PASSENGER ID </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="cname">
+                    <mat-header-cell *matHeaderCellDef> PASSENGER NAME </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.cname}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="seatno">
+                    <mat-header-cell *matHeaderCellDef> SEAT NO </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.seatno}} </mat-cell>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="ancillary">
+                    <mat-header-cell *matHeaderCellDef> ANCILLARY SERVICES </mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.ancillaryService}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="meal">
+                    <mat-header-cell *matHeaderCellDef> MEAL </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.meal}} </mat-cell>
+                  </ng-container>
+                  <ng-container  matColumnDef="add ancillary">
+                    <mat-header-cell *matHeaderCellDef> ADD ANCILLARY </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="addAncillary($event,element)">add ancillary</button></mat-cell>
+                  </ng-container>
+                  <ng-container  matColumnDef="change meal">
+                    <mat-header-cell *matHeaderCellDef> CHANGE MEAL </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="changeMeal($event,element)">change meal</button></mat-cell>
+                  </ng-container>
+                  <ng-container  matColumnDef="in flight shop">
+                    <mat-header-cell *matHeaderCellDef>IN-FLIGHT SHOP</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="inFlight($event,element)">shop</button></mat-cell>
+                  </ng-container>
+                  
+                  
+                 
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                
+              </mat-table>
+            </div>
+          </div>
+        </div>
+
+
+       
+
+
+
+        <div [style.display]="showAncillary ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div>
+                  <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+                </div>
+                
+                  <h2><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;ADD ANCILLARY&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></h2>
+               
+                <div class="modal-body">
+          
+                    <div class="row">
+                        <div class="col" >
+                        <form [formGroup]="deleteServiceForm"  (ngSubmit)="onDeleteService(deleteServiceForm.value,passengerId)" novalidate>
+                        
+                          <label><strong>Ancillary Services</strong></label>
+                                      <label  id="flightrightid">
+                                            <label *ngFor="let data of missing; let i=index">
+                                              <input  class="check" type="checkbox" [value]="data" (change)="onCheckboxChangeAncillary($event)">
+                                              {{data}}&nbsp;
+                                            </label>
+                                      </label>
+                                            <br/>
+                                            <br/>
+                            
+                             <div class="flightright">
+                              <button class="btn btn-dark color">Add</button>&nbsp;
+                              
+                             </div>     
+                         
+                        </form>
+                        </div>
+                        </div>
+                 
+          
+          
+          
+         
+          
+          </div>
+          </div>
+          </div>
+        </div>
+
+          <div [style.display]="showMeal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div>
+                  <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+                </div>
+                
+                  <h2><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;Change Meal&nbsp;<i class="fa fa-cutlery" aria-hidden="true"></i></h2>
+               
+                <div class="modal-body">
+               
+          
+          
+          
+          
+          <div class="row">
+          <div class="col">
+          
+            
+          
+           
+           
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" novalidate>
+         
+          
+            <label>Available Meals</label>
+                              <label  id="flightrightid">
+                        
+                              <select formControlName="meal">
+                                <option value="" disabled selected hidden>Select Meal</option>
+                                <option *ngFor="let data of mealArray"  [value]="data">
+                                {{data}}
+                                </option>
+                                </select>
+                              </label>
+                              <br/>
+                              <br/>
+                              
+                     <div class="flightright">
+                      <button class="btn btn-dark color" [disabled]="!profileForm.valid">Update Meal</button>&nbsp;
+                      
+                     </div>      
+           
+          </form>
+          </div>
+          </div>
+          </div>
+          
+          </div>
+            </div>
+          </div>
+        
+
+         
+
+
+        
+
+
+          <div [style.display]="showShop ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div>
+                  <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+                </div>
+                
+                  <h2><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;In Flight Shop&nbsp;<i class="fa fa-shopping-cart" aria-hidden="true"></i></h2>
+               
+                <div class="modal-body">
+          
+                    <div class="row">
+                        <div class="col" >
+                        <form [formGroup]="shopForm"  (ngSubmit)="addItems(shopForm.value,pid)" novalidate>
+                        
+                          <label><strong>Available Shopping Items</strong></label>
+                                      <label  id="flightrightid">
+                                            <label *ngFor="let data of missing; let i=index">
+                                              <input  class="check" type="checkbox" [value]="data" (change)="onCheckboxChangeShop($event)">
+                                              {{data}}&nbsp;
+                                            </label>
+                                      </label>
+                                            <br/>
+                                            <br/>
+                            
+                             <div class="flightright">
+                              <button class="btn btn-dark color">Add Items</button>&nbsp;
+                              
+                             </div>     
+                         
+                        </form>
+                        </div>
+                        </div>
+                 
+          
+          
+          
+         
+          
+          </div>
+          </div>
+          </div>
+        </div>
+
+
+
+
+          <!-- <div [style.display]="showShop ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div>
+                  <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+                </div>
+                
+                  <h2>In Flight Shop</h2>
+               
+                <div class="modal-body">
+          <div class="row">
+          <div class="col">
+          <form [formGroup]="shopForm" (ngSubmit)="onSubmitShop(shopForm.value)" novalidate>
+         
+          
+            <label>Available Shopping Items</label>
+                              <label  id="flightrightid">
+                        
+                                <label><strong>Available Shopping Items</strong></label>
+                                <label  id="flightrightid">
+                                      <label *ngFor="let data of shopArray; let i=index">
+                                        <input  class="check" type="checkbox" [value]="data" (change)="onCheckboxChangeShop($event)">
+                                        {{data}}&nbsp;
+                                      </label>
+                                </label>
+                                      <br/>
+                                      <br/>
+
+                              
+                     <div class="flightright">
+                      <button class="btn btn-dark color" [disabled]="!shopForm.valid">Update Items</button>&nbsp;
+                      
+                     
+           
+          </form>
+          </div>
+          </div>
+          </div>
+          </div> -->
+          <!-- </div> -->
+          
+          
+        
+          
+          

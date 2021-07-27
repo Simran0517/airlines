@@ -1,0 +1,387 @@
+
+
+  <div class="cont">
+
+    <nav class="navbar navbar-custom navbar-dark">
+                  <i class="fa fa-plane far">&nbsp;<span>SKY WORLD</span></i>
+                   <span><a routerLinkActive="active" routerLink="/login" style="color:white" (click)="log()"><strong>Log Out</strong></a></span>
+                   
+    
+    </nav>
+  </div>
+  
+      
+    
+    <div class="row">
+      <div class="col">
+    
+ 
+    <mat-table [dataSource]="datanew" class="mat-elevation-z8" class="left">
+      
+        
+    
+        <ng-container matColumnDef="flightId">
+            <mat-header-cell *matHeaderCellDef> FLIGHT NUMBER </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="flightName">
+            <mat-header-cell *matHeaderCellDef> FLIGHT NAME </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.flightName}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="departureTime">
+            <mat-header-cell *matHeaderCellDef> DEPARTURE TIME </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.departureTime}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="departureFrom">
+            <mat-header-cell *matHeaderCellDef> DEPARTURE FROM </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.departureFrom}} </mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="arrivalTime">
+            <mat-header-cell *matHeaderCellDef> ARRIVAL TIME </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.arrivalTime}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="arrivalTo">
+            <mat-header-cell *matHeaderCellDef> ARRIVAL TO </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.arrivalTo}} </mat-cell>
+          </ng-container>
+          
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> PRICE(RS) </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+          </ng-container>
+          <ng-container  matColumnDef="details">
+            <mat-header-cell *matHeaderCellDef> DETAILS </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="onSelected($event,element)">passenger details</button></mat-cell>
+          </ng-container>
+          <ng-container  matColumnDef="addPassenger">
+            <mat-header-cell *matHeaderCellDef> ADD PASSENGER </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="addPassenger($event,element)">add passenger</button></mat-cell>
+          </ng-container>
+          
+          <ng-container  matColumnDef="services">
+            <mat-header-cell *matHeaderCellDef>SERVICES</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-form-field >
+                <mat-select placeholder= "sel  ancillary services">
+                  <mat-option (click)="addServices($event,element)"><strong>
+                    Add Ancillary</strong>
+                  </mat-option>
+                  <mat-option (click)="deleteServices($event,element)"><strong>
+                    Delete Ancillary</strong>
+                  </mat-option>
+                 
+                  
+                </mat-select>
+              </mat-form-field>
+          </mat-cell>
+             
+
+ </ng-container>
+
+         
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+      </mat-table>
+      <br>
+    
+      <br>
+  
+    </div>
+    </div>
+
+
+    <div class="row">
+    <div class="col">
+        <app-selected-flight></app-selected-flight>
+    </div>
+    </div>
+
+    
+
+
+
+
+    <div [style.display]="showModal ? 'block' : 'none'" class="modal addPassenger modal-backdrop" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div>
+              <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+            </div>
+            
+              <h2><i class="fa fa-user"></i>&nbsp;Add Passenger&nbsp;<i class="fa fa-user"></i></h2>
+           
+            <div class="modal-body">
+    
+
+
+
+    <div class="row">
+    <div class="col" *ngIf="addPassengerDisable==true"  [dataSource]="data">
+
+        
+    
+       
+       
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" novalidate>
+           
+        
+      
+       
+          <label><strong>Flight Id</strong></label>
+          <label id="flightrightid"> 
+          <input formControlName="flightId" value="{{id}}" type="radio" [(ngModel)]="id">&nbsp;{{id}}
+          </label>
+          
+<br/>
+<br/>
+        <label><strong>Passenger Name </strong></label>
+        <input  type = "text"   placeholder = "Passenger Name" formControlName="cname">
+        
+        
+    
+        <br/>
+        <br/>
+        
+            
+            <label><strong>Passport </strong></label>
+                <input type = "text"  placeholder = "Passport" formControlName="passport" >
+               
+                <br/>
+                <br/>
+            <label><strong>Address  </strong></label>
+                <input type = "text"  placeholder = "Address" formControlName="address" >
+              
+                <br/>
+                <br/>
+            <label><strong>DOB</strong> </label>
+                <input type = "date"  placeholder = "Date Of Birth" formControlName="dob" >
+               
+                <br/>
+                <br/>
+
+
+                <label><strong>Check In  </strong></label>
+                <label id="flightrightid">
+                   <select formControlName="checkin" required>
+                  <option value="" disabled selected hidden>Select CheckIn Status</option>
+                  <option value="true"> True</option>
+                  <option value="false">False</option>
+                  </select>
+                </label>
+            <br/>
+            <br/>
+                <label><strong>Category </strong></label>
+              
+                <label id="flightrightid"> 
+                  <select formControlName="category">
+                    <option value="" disabled selected hidden>Select Category</option>
+                    <option value="adult">Adult</option>
+                    <option value="kid">Kid</option>
+                    <option value="senior citizen">Senior Citizen</option>
+                    </select>
+                    </label>
+                <br/>
+                <br/>
+                <label><strong>Special Category</strong></label>
+                <label id="flightrightid"> 
+                  <select formControlName="otherCategory">
+                    <option value="" disabled selected hidden>Select Category</option>
+                    <option value="wheel chair">Wheel Chair</option>
+                    <option value="with infant">With Infant</option>
+                    <option value="null">None</option>
+                </select>
+                </label>
+                <br/>
+                <br/>
+                <label><strong>Ancillary Services</strong></label>
+              <label  id="flightrightid">
+                    <label *ngFor="let data of resultArray; let i=index">
+                      <input type="checkbox" [value]="data" (change)="onCheckboxChange($event)" [checked]="temp == 1 ? '' : null"/>
+                      {{data}}&nbsp;
+                    </label>
+              </label>
+                    <br/>
+                    <br/>
+
+                    <label><strong>Meals</strong></label>
+                    <label  id="flightrightid">
+                    <select formControlName="meal">
+                      <option value="" disabled selected hidden>Select Meal</option>
+                      <option  *ngFor="let data of mealArray"  [value]="data">
+                      {{data}}</option>
+                      </select>
+                    
+                    </label>
+                    
+                    <br/>
+                    <br/>
+                 
+                    <label><strong>Available Seats</strong></label>
+                    <label  id="flightrightid">
+              
+                    <select formControlName="seatno">
+                      <option value="" disabled selected hidden>Select Seat</option>
+                      <option *ngFor="let data of missing"  [value]="data">
+                      {{data}}
+                      </option>
+                      </select>
+                    </label>
+                    <br/>
+                    <br/>
+                    
+           <div class="flightright">
+            <button class="btn btn-dark color" [disabled]="!profileForm.valid">Add</button>&nbsp;
+            
+           </div>     
+       
+      </form>
+    </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div [style.display]="showServiceModal ? 'block' : 'none'" class="modal modal-backdrop modal-2" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div>
+        <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+      </div>
+      
+        <h2><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Services&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></h2>
+     
+      <div class="modal-body">
+
+
+
+
+<div class="row">
+<div class="col" *ngIf="addService==true" [dataSource]="sid">
+<form [formGroup]="addServiceForm" (ngSubmit)="onAddService(addServiceForm.value,sid)" novalidate>
+
+  <label><strong>Ancillary Item</strong></label>
+  <input  type = "text"   placeholder = "ancillary name" formControlName="ancillaryServices">
+  <br/>
+  <br/>
+  <label><strong>In Flight Service Item</strong></label>
+  <input  type = "text"   placeholder = "ancillary name" formControlName="inFlightServices">
+  <br/>
+  <br/>
+  <label><strong>Meals</strong></label>
+  <input  type = "text"   placeholder = "ancillary name" formControlName="specialMeals">
+  <br/>
+  <br/>
+     
+  
+
+ 
+    
+     <div class="flightright">
+      <button class="btn btn-dark color">Add</button>&nbsp;
+      
+     </div>     
+ 
+</form>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+
+<div [style.display]="deleteServiceModal ? 'block' : 'none'" class="modal modal-backdrop modal-2" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div>
+        <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+      </div>
+      
+        <h2><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Delete Services&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></h2>
+     
+      <div class="modal-body">
+<div class="row">
+<div class="col" *ngIf="deleteService==true" [dataSource]="did">
+<form [formGroup]="deleteServiceForm" (ngSubmit)="onDeleteService(deleteServiceForm.value,did)" novalidate>
+
+  <label><strong>Ancillary Services</strong></label>
+              <label  id="flightrightid">
+                    <label *ngFor="let data of ancillaryArray1; let i=index">
+                      <input type="checkbox" [value]="data" (change)="onCheckboxChangeAncillary($event)">
+                      {{data}}&nbsp;
+                    </label>
+              </label>
+                    <br/>
+                    <br/>
+   <label><strong>InFlight Shopping</strong></label>
+              <label  id="flightrightid">
+                    <label *ngFor="let data of shoppingArray1; let i=index">
+                      <input type="checkbox" [value]="data" (change)="onCheckboxChangeShopping($event)">
+                      {{data}}&nbsp;
+                    </label>
+              </label>
+                    <br/>
+                    <br/>
+                    <label><strong>Meals</strong></label>
+                    <label  id="flightrightid">
+                          <label *ngFor="let data of mealArray1; let i=index">
+                            <input type="checkbox" [value]="data" (change)="onCheckboxChangeMeal($event)">
+                            {{data}}&nbsp;
+                          </label>
+                    </label>
+                          <br/>
+                          <br/>
+  
+  
+
+ 
+    
+     <div class="flightright">
+      <button class="btn btn-dark color">Delete</button>&nbsp;
+      
+     </div>     
+ 
+</form>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<!-- </div> -->
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+     
+      

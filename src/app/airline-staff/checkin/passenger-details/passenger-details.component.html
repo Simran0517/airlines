@@ -1,0 +1,152 @@
+
+<div class="container">
+<div class="row">
+    <div class="col">
+  
+  
+  
+  <div *ngIf="newdata.length > 0">
+    <mat-form-field *ngFor="let filter of filterSelectObj"  style="margin-left: 15px;">
+      <mat-label>Filter {{filter.name}}</mat-label>
+      <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+        (change)="filterChange(filter,$event)">
+      
+        <option [value]="item" *ngFor="let item of filter.options">{{item}}</option>
+      </select>
+    </mat-form-field>
+    &nbsp;
+    <button (click)="resetFilters()">Reset</button>
+    
+    </div>
+
+    <br/>
+    <br/><br/>
+     
+    
+      
+      
+    
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="newdata.length > 0">
+      
+    
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> PASSENGER ID </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="cname">
+            <mat-header-cell *matHeaderCellDef> PASSENGER NAME </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cname}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="seatno">
+            <mat-header-cell *matHeaderCellDef> SEAT NO </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.seatno}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="checkin">
+            <mat-header-cell *matHeaderCellDef> CHECKIN STATUS </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.checkin}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="ancillary">
+            <mat-header-cell *matHeaderCellDef> ANCILLARY SERVICES </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.ancillaryService}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="special">
+            <mat-header-cell *matHeaderCellDef> SPECIAL CATEGORY </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.otherCategory}} </mat-cell>
+          </ng-container>
+          <ng-container  matColumnDef="change seat">
+            <mat-header-cell *matHeaderCellDef> CHANGE SEAT </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="changeSeat($event,element)">change seat</button></mat-cell>
+          </ng-container>
+          
+          
+          
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+      </mat-table>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div>
+        <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+      </div>
+      
+        <h2><i class='fas fa-chair'></i>&nbsp;Change Seat&nbsp;<i class="fas fa-chair"></i></h2>
+     
+      <div class="modal-body">
+
+
+
+
+<div class="row">
+<div class="col" *ngIf="updatePassengerDisable==true"  [dataSource]="passengerValue">
+
+  
+
+ 
+ 
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" novalidate>
+
+
+  <label>Available Seats</label>
+                    <label  id="flightrightid">
+              
+                    <select formControlName="seatno">
+                      <option value="" disabled selected hidden>Select Seat</option>
+                      <option *ngFor="let data of missing"  [value]="data">
+                      {{data}}
+                      </option>
+                      </select>
+                    </label>
+                    <br/>
+                    <br/>
+                    
+           <div class="flightright">
+            <button class="btn btn-dark color" [disabled]="!profileForm.valid">Update Seat</button>&nbsp;
+            
+           </div>      
+ 
+</form>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+      
+  

@@ -1,0 +1,201 @@
+<div class="cont">
+
+  <nav class="navbar navbar-custom navbar-dark">
+                <i class="fa fa-plane far">&nbsp;<span>SKY WORLD</span></i>
+                <span><a routerLinkActive="active" routerLink="/login" style="color:white" (click)="goInflight()"><strong>Back</strong></a></span>
+                 <span><a routerLinkActive="active" routerLink="/login" style="color:white" (click)="logOut()"><strong>Log Out</strong></a></span>
+                 
+  
+  </nav>
+  <div>
+      <!-- <app-login></app-login> -->
+    </div>
+    
+<div class="margin">
+  <span><strong>select any one&nbsp;</strong></span>
+<select (click)="getFlight($event.target.value)">Flight Schedule
+<option value="-2">Recent</option>
+
+<option value="All">All</option>
+
+</select>
+
+</div>
+<div class="container">
+
+
+<div class="row">
+    <div class="col">
+  
+  
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="left" *ngIf="dataFlight==true">
+      
+  
+      <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> FLIGHT NUMBER </mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+        </ng-container>
+       
+        <ng-container matColumnDef="flightName">
+          <mat-header-cell *matHeaderCellDef> FLIGHT NAME </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.flightName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="departureTime">
+          <mat-header-cell *matHeaderCellDef> DEPARTURE TIME </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.departureTime}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="departureFrom">
+          <mat-header-cell *matHeaderCellDef> DEPARTURE FROM </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.departureFrom}} </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="arrivalTime">
+          <mat-header-cell *matHeaderCellDef> ARRIVAL TIME </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.arrivalTime}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="seatmap">
+          <mat-header-cell *matHeaderCellDef> Seat Map </mat-header-cell>
+          <mat-cell *matCellDef="let element">  <button val={{element.id}} (click)="showSeatMap($event,element)">Seat Map</button></mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="special">
+          <mat-header-cell *matHeaderCellDef> Seat Map Special</mat-header-cell>
+          <mat-cell *matCellDef="let element">  <button (click)="show($event,element)">Seat Map Special</button></mat-cell>
+        </ng-container>
+
+        <ng-container  matColumnDef="details">
+          <mat-header-cell *matHeaderCellDef> DETAILS </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="onSelected($event,element)">passenger details</button></mat-cell>
+        </ng-container>
+      
+    
+            
+    
+        
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+        
+      </mat-row>
+      
+    </mat-table>
+    </div>
+</div>
+</div>
+
+
+
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div>
+        <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+      </div>
+      
+        <h2><i class="fa fa-check-square" aria-hidden="true"></i>&nbsp;CHECK-IN MAP&nbsp;<i class="fa fa-check-square" aria-hidden="true"></i></h2>
+
+        
+     
+      <div class="modal-body">
+
+
+        <div class="row">
+          <div class="col-sm-4"><div class="square2">
+
+          </div>
+          <span class="div-name">Checked In</span></div>
+          <div class="col-sm-4">
+            <div class="square3">
+
+            </div>
+            <span class="div-name">Not Checked In</span>
+          </div>
+          <div class="col-sm-4"> <div class="square4">
+
+          </div>
+        <span class="div-name">Available Seats</span></div>
+        </div>
+        
+
+      <br/>
+        <br/>
+
+<div *ngIf="showSeatMapDisable==true"  [dataSource]="newSeat">
+  <mat-grid-list cols="6" rowHeight="20" [gutterSize]="'10px'">
+        <div *ngFor="let tile of newSeat ; let i = index">
+<!-- <mat-grid-tile id="status" (click)="changeStatus(tile)" [ngClass]="passengerTrueNull.includes(tile) ? 'true-null':'default' && passengerFalseNull.includes(tile) ? 'false-null':'default' && passengerTrueWheel.includes(tile) ? 'true-wheel':'default' && passengerFalseWheel.includes(tile) ? 'false-wheel':'default' && passengerTrueInfant.includes(tile) ? 'true-infant':'default' && passengerFalseInfant.includes(tile) ? 'false-infant':'default'"> {{newSeat[i]}}</mat-grid-tile> -->
+<mat-grid-tile name="submitButton" #submitButton id="status" (click)="changeStatus(tile)" [ngClass]="passengerTrueNull.includes(tile) ? 'true-null':'default' && passengerFalseNull.includes(tile) ? 'false-null':'default'"> {{newSeat[i]}}</mat-grid-tile>
+</div>
+
+</mat-grid-list>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div [style.display]="showModalSpecial ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div>
+        <button class="floatright" data-dismiss="modal" (click) = "hide2()">X</button>
+      </div>
+      
+        <h2><i class="fas fa-chair" aria-hidden="true"></i>&nbsp;SPECIAL SEATS&nbsp;<i class="fas fa-chair"></i></h2>
+     
+      <div class="modal-body">
+
+
+        <div class="row">
+          <div class="col-sm-4"><div class="square">
+
+          </div>
+          <span class="div-name">Wheel Chair</span></div>
+          <div class="col-sm-4"><div class="square1">
+
+          </div>
+          <span class="div-name">With Infant</span></div>
+          
+        </div>
+
+
+
+               <br/>
+        <br/>
+        
+
+<div *ngIf="showSeatMapSpecialDisable==true"  [dataSource]="newSeats">
+  <mat-grid-list cols="6" rowHeight="20" [gutterSize]="'10px'">
+        <div *ngFor="let tile of newSeats ; let i = index">
+
+<mat-grid-tile  [ngClass]="passengerWheel.includes(tile) ? 'true-wheel':'default1' && passengerInfant.includes(tile) ? 'true-infant':'default1'"> {{newSeats[i]}}</mat-grid-tile>
+</div>
+
+</mat-grid-list>
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<br/>
+<br/>
+<br/>
+
+
+
+<div class="row">
+  <div class="col">
+      <app-passenger-details></app-passenger-details>
+  </div>
+  </div>

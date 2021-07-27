@@ -1,0 +1,30 @@
+
+
+    <div class="cont">
+
+        <nav class="navbar navbar-custom navbar-dark">
+                      <i class="fa fa-plane far">&nbsp;<span>SKY WORLD</span></i>
+                       <span><a routerLinkActive="active" routerLink="/login" style="color:white" (click)="logOut()"><strong>Log Out</strong></a></span>
+                       
+        
+        </nav>
+        <div>
+            <!-- <app-login></app-login> -->
+          </div>
+    <nav class="navbar navbar-expand-lg left-nav">
+       
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" routerLinkActive="active" 
+                        routerLink="/checkin">CheckIn</a></li>
+                    <li class="nav-item"><a class="nav-link" routerLinkActive="active" 
+                        routerLink="/inflight">InFlight</a></li>
+                </ul>
+                 
+        
+        </div>
+    </nav>
+
+    <div>
+        <router-outlet></router-outlet>
+    </div>

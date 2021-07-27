@@ -1,0 +1,148 @@
+.box{
+    margin-top:20px;
+    border:1px solid black;
+}
+.modal{
+  margin-top: 150px;
+}
+
+.left{
+    margin: 20px;
+    border: 1px solid black;
+}
+form{
+    margin:20px;
+}
+label{
+  color: black;
+  font-size: 15px;
+}
+input[type=radio]{
+  border:1px solid black;
+  
+}
+#HASH {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-size: 15px;
+}
+.radioRight
+{
+    text-align:right;
+}
+
+#flightrightid{
+  float: right;
+  clear: both;
+}
+
+span{
+    color:black;
+}
+.floatright{
+  float: right;
+text-align: center;
+  border-radius: 1px;
+  /* width:10px;  */
+  margin:5px;
+  color:white;
+  background:black;
+  
+}
+.flightright{
+  float: right;
+  clear: both;
+}
+input[type=text] {
+  float: right;
+  clear: both;
+
+}
+input[type=date] {
+  float: right;
+  clear: both;
+
+}
+
+option{
+  color: black;
+}
+
+option[value=""][disabled] {
+  display: none;
+  color: black;
+}
+.addbutton{
+  border:1px solid white;
+  border-radius: 10px;
+    font-size: 10px;
+  color:white;
+  background:black;
+  /* width:30px; */
+}
+.color{
+  background-color: black;
+}
+
+.modal-body{
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  max-width: 900%;
+  overflow-x:auto;
+}
+.modal-backdrop {
+    background-color: rgba(36, 27, 27, 0.493);
+}
+
+
+input {
+    
+    padding: 2px;
+    /* float:right; */
+    border-radius: 3px;
+    border:1px solid black;
+   
+    font-family: consolas;
+    color: black;
+
+  }
+
+  button{
+    background-color: silver;
+    font-weight: bold;
+    border:1px white;
+    
+  }
+  
+  .mat-header-cell {
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 11px;
+    color:whitesmoke;
+    background-color: black;;
+  }
+  
+  .mat-cell {
+    text-align: center;
+    justify-content:center;
+    font-weight: bold;
+  }
+  
+  
+  button{
+    border-radius: 10px;
+    font-size: 10px;
+    margin-left:1px;
+  
+  }
+  h2{
+    margin-top: 10px;
+    text-align: center;
+    color: black;
+  }
+  .border{
+    border:1px solid black;
+  }
+  

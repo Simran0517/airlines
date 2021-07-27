@@ -1,0 +1,43 @@
+
+   
+    
+    
+    #login .container #login-row #login-column .login-box #login-form {
+      padding: 20px;
+    }
+    #login .container #login-row #login-column .login-box #login-form #register-link {
+      margin-top: -85px;
+    }
+    
+    
+    
+    
+    body{font-family: arial}
+    .jumbotron{width:450px; margin:0 auto; padding:2rem;}
+    .marginBottom { margin-bottom: .75rem;}
+
+
+
+    .navbar-custom{
+        background-color:black;
+        height: 50px;
+      }
+      .far{
+        color: white;
+        font-size: 20px;
+      } 
+      .cont{
+          margin-top:20px;
+          
+      }
+      .navbar-nav{
+          background-color: black;
+          color:white;
+      }
+
+      /* .left-nav{
+          align:"center";
+          width: 100%;
+          margin-left:500px;
+      } */
+    

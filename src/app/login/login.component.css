@@ -1,0 +1,63 @@
+    
+    
+    .box {
+      border: 1px solid white;
+      background-color: black;
+      color:white;
+    }
+    
+    
+    .btns{
+      background-color:black;
+      color: silver;
+      border: 1px solid white;
+      border-radius: 10px;
+      height: 30px;
+    width: 100px;
+    
+    margin-right:100px;
+     
+    }
+    
+    
+    #login .container #login-row #login-column .login-box #login-form {
+      padding: 20px;
+    }
+    #login .container #login-row #login-column .login-box #login-form #register-link {
+      margin-top: -85px;
+    }
+    
+    
+    
+    
+    body{font-family: arial}
+    .jumbotron{width:450px; margin:0 auto; padding:2rem;}
+    .marginBottom { margin-bottom: .75rem;}
+
+
+
+    .navbar-custom{
+        background-color:black;
+        height: 50px;
+      }
+      .far{
+        color: white;
+        font-size: 20px;
+      } 
+      .cont{
+          margin-top:20px;
+          
+      }
+      .button1{
+          margin-right: 100px;
+      }
+    .button2{
+        margin-right: 200px;
+    }
+      :disabled{
+          background-color: white;
+          border:1px solid black;
+          color:black;
+          /* opacity: 0.3; */
+      }
+    

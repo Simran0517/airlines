@@ -1,0 +1,62 @@
+
+
+
+
+<div class="cont">
+
+    <nav class="navbar navbar-custom navbar-dark">
+                  <i class="fa fa-plane far">&nbsp;<span>SKY WORLD</span></i>
+                  
+                   
+    
+    </nav>
+    <div>
+        
+      </div>
+<body class="bg-image">
+  
+
+    
+    <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+            <div class="login-box col-md-12">
+                <form id="login-form" class="form" action="" method="post" [formGroup]="profileForm" (ngSubmit)="onSubmit()" >
+                    <br>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label for="username" style="color:black"><strong>USERNAME</strong></label><br>
+                        <input type="text" name="username" id="username" class="form-control box" formControlName="firstName" placeholder="username [admin OR air]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" style="color:black"><strong>PASSWORD</strong></label><br>
+                        <input type="text" name="password" id="password" class="form-control box" formControlName="lastName" placeholder="password [admin OR air]" required>
+                    </div>
+                    <div class="form-group">
+                        
+                        <input type="submit" name="submit" [disabled]="!profileForm.valid" value="submit" class=" button2 btns">
+                        <button class="button2 btns" (click)="socialSignIn('google')">google</button>
+                    </div>
+           
+                    <!-- <button class="vertical-center2 btns" (click)="socialSignIn('google')">google</button>   -->
+                    <!-- <button class="vertical-center2 btns" (click)="log()">sign out</button> -->
+
+                  
+
+
+                    
+                    
+                </form>
+                
+            </div>
+        </div>
+   
+    
+</div>
+ 
+
+
+
+
+
+

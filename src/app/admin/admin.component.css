@@ -1,0 +1,182 @@
+.left{
+    margin: 40px;
+   
+}
+form{
+    margin:20px;
+}
+
+.addPassenger{
+  margin-top: 10px;
+}
+label{
+  color: black;
+  font-size: 15px;
+}
+input[type=radio]{
+  border:1px solid black;
+  
+}
+#HASH {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+  font-size: 15px;
+}
+
+
+#flightrightid{
+  float: right;
+  clear: both;
+}
+.floatright{
+  float: right;
+text-align: center;
+  border-radius: 1px;
+  /* width:10px;  */
+  margin:5px;
+  color:white;
+  background:black
+  
+}
+.flightright{
+  float: right;
+  clear: both;
+}
+input[type=text] {
+  float: right;
+  clear: both;
+
+}
+input[type=date] {
+  float: right;
+  clear: both;
+
+}
+
+option{
+  color: black;
+}
+
+option[value=""][disabled] {
+  display: none;
+  color: black;
+}
+
+.color{
+  background-color: black;
+}
+
+button{
+  background-color: silver;
+  font-weight: bold;
+  border:1px white;
+  
+}
+
+.mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 11px;
+  color:whitesmoke;
+  background-color: black;;
+}
+
+.mat-cell {
+  text-align: center;
+  justify-content:center;
+  font-weight: bold;
+}
+
+.modal-body{
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  max-width: 900%;
+  overflow-x:auto;
+}
+
+
+
+input {
+    
+    padding: 2px;
+    /* float:right; */
+    border-radius: 3px;
+    border:1px solid black;
+   
+    font-family: consolas;
+    color: black;
+
+  }
+  button{
+    border-radius: 10px;
+    font-size: 10px;
+    margin-left:1px;
+  
+  }
+
+ 
+
+  
+  h2{
+    margin-top: 10px;
+    text-align: center;
+    color: black;
+  }
+  
+  .modal-backdrop {
+    background-color: rgba(36, 27, 27, 0.493);
+}
+
+.modal-2{
+  margin-top: 100px;
+}
+
+
+
+
+  
+  
+  .btns{
+    background-color:black;
+    color: silver;
+    border: 1px solid white;
+    border-radius: 10px;
+    height: 30px;
+  width: 100px;
+  
+   
+  }
+  
+  
+  #login .container #login-row #login-column .login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column .login-box #login-form #register-link {
+    margin-top: -85px;
+  }
+  
+  
+  
+  
+  body{font-family: arial}
+  .jumbotron{width:450px; margin:0 auto; padding:2rem;}
+  .marginBottom { margin-bottom: .75rem;}
+
+
+
+  .navbar-custom{
+      background-color:black;
+      height: 50px;
+    }
+    .far{
+      color: white;
+      font-size: 20px;
+    } 
+    .cont{
+        margin-top:20px;
+        
+    }
+  
+  

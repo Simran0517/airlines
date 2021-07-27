@@ -1,0 +1,142 @@
+
+<div class="container">
+<div class="row">
+    <div class="col">
+  
+  
+  
+  <div *ngIf="newdata.length > 0">
+    <mat-form-field *ngFor="let filter of filterSelectObj"  style="margin-left: 15px;">
+      <mat-label>Filter {{filter.name}}</mat-label>
+      <select matNativeControl name="{{filter.columnProp}}" [(ngModel)]="filter.modelValue"
+        (change)="filterChange(filter,$event)">
+      
+        <option [value]="item" *ngFor="let item of filter.options">{{item}}</option>
+      </select>
+    </mat-form-field>
+    &nbsp;
+    <button (click)="resetFilters()">Reset</button>
+    
+    </div>
+     
+    
+      
+      
+    
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="newdata.length > 0">
+      
+    
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> PASSENGER ID </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.id}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="cname">
+            <mat-header-cell *matHeaderCellDef> PASSENGER NAME </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cname}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="checkin">
+            <mat-header-cell *matHeaderCellDef> CHECKIN STATUS </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.checkin}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="seatno">
+            <mat-header-cell *matHeaderCellDef> SEAT NO </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.seatno}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="passport">
+            <mat-header-cell *matHeaderCellDef> PASSPORT </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.passport}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="dob">
+            <mat-header-cell *matHeaderCellDef> DOB </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.dob}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef> ADDRESS </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.address}} </mat-cell>
+          </ng-container>
+          <ng-container  matColumnDef="updatePassenger">
+            <mat-header-cell *matHeaderCellDef> UPDATE PASSENGER </mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="updatePassenger($event,element)">update passenger</button></mat-cell>
+          </ng-container>
+          
+          
+          
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        
+      </mat-table>
+    </div>
+  </div>
+      
+  <div [style.display]="showModal ? 'block' : 'none'" class="modal modal-backdrop" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div>
+          <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+        </div>
+        
+          <h2><i class="fa fa-user"></i>&nbsp;Update Passenger&nbsp;<i class="fa fa-user"></i></h2>
+       
+        <div class="modal-body">
+
+
+
+
+<div class="row">
+<div class="col" *ngIf="updatePassengerDisable==true"  [dataSource]="passengerValue">
+
+    
+
+   
+   
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit(profileForm.value)" novalidate>
+      
+    <label>Passenger Name </label>
+ 
+    <input  type = "text"   placeholder = "Passenger Name" formControlName="cname">
+    
+    <span class="flightright"> previous value: {{name}}</span>
+  
+    <br/>
+    <br/>
+
+    
+        
+        <label>Passport </label>
+        
+            <input type = "text"  placeholder = "Passport" formControlName="passport">
+            <span class="flightright">previous value: {{passport}}</span>
+           
+            <br/>
+            <br/>
+        <label>Address  </label>
+            <input type = "text"  placeholder = "Address" formControlName="address">
+            <span class="flightright">previous value: {{address}}</span>
+          
+            <br/>
+            <br/>
+        <label>DOB</label>
+            <input type = "date"  placeholder = "Date Of Birth" formControlName="dob">
+            <span class="flightright">previous value: {{dob}}</span>
+            <br/>
+            <br/>
+            <br/>
+                
+       <div class="flightright">
+        <button class="addbutton">Update</button>&nbsp;
+        
+       </div>     
+   
+  </form>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+    
+    
+      
+     

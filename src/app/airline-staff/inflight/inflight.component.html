@@ -1,0 +1,160 @@
+
+<div class="cont">
+
+  <nav class="navbar navbar-custom navbar-dark">
+                <i class="fa fa-plane far">&nbsp;<span>SKY WORLD</span></i>
+                <span><a routerLinkActive="active" routerLink="/login" style="color:white" (click)="goInflight()"><strong>Back</strong></a></span>
+                 <span><a routerLinkActive="active" routerLink="/login" style="color:white" (click)="logOut()"><strong>Log Out</strong></a></span>
+                 
+  
+  </nav>
+  <div>
+      <!-- <app-login></app-login> -->
+    </div>
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+      
+      
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="left">
+          
+      
+          <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> FLIGHT NUMBER </mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+            </ng-container>
+           
+            <ng-container matColumnDef="flightName">
+              <mat-header-cell *matHeaderCellDef> FLIGHT NAME </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.flightName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ancillary">
+              <mat-header-cell *matHeaderCellDef> ANCILLARY SERVICE </mat-header-cell>
+              <mat-cell *matCellDef="let element"> 
+                <ul>
+                    <li *ngFor="let e of element.ancillaryServices; let i=index">
+                            {{element.ancillaryServices[i]}}
+                          </li>
+                  </ul>
+             </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="meals">
+              <mat-header-cell *matHeaderCellDef>Meal </mat-header-cell>
+              <mat-cell *matCellDef="let element" >
+                  <ul>
+                  <li *ngFor="let e of element.specialMeals; let i=index">
+                          {{element.specialMeals[i]}}
+                        </li>
+                </ul>
+               
+                </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="inflight">
+              <mat-header-cell *matHeaderCellDef> IN-FLIGHT SERVICE </mat-header-cell>
+              <mat-cell *matCellDef="let element">  <ul>
+                <li *ngFor="let e of element.inFlightServices; let i=index">
+                        {{element.inFlightServices[i]}}
+                      </li>
+              </ul></mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="map">
+              <mat-header-cell *matHeaderCellDef> MEAL MAP </mat-header-cell>
+              <mat-cell *matCellDef="let element">  <button val={{element.id}} (click)="showSeatMap($event,element)">meal map</button></mat-cell>
+            </ng-container>
+    
+            <ng-container  matColumnDef="details">
+              <mat-header-cell *matHeaderCellDef> DETAILS </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <button val={{element.id}} (click)="onSelected($event,element)">passenger details</button></mat-cell>
+            </ng-container>
+          
+        
+                
+        
+            
+        
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+            
+          </mat-row>
+          
+        </mat-table>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div>
+              <button class="floatright" data-dismiss="modal" (click) = "hide()">X</button>
+            </div>
+            
+              <h2><i class="fa fa-cutlery" aria-hidden="true"></i>&nbsp;MEAL MAP&nbsp;<i class="fa fa-cutlery" aria-hidden="true"></i></h2>
+      
+              
+           
+            <div class="modal-body">
+      
+      
+              <div class="row">
+                <div class="col-sm-3"><div class="square2">
+      
+                </div>
+                <span class="div-name">Veg</span></div>
+                <div class="col-sm-3">
+                  <div class="square3">
+      
+                  </div>
+                  <span class="div-name">Non Veg</span>
+                </div>
+                <div class="col-sm-3"> <div class="square5">
+      
+                </div>
+              <span class="div-name">Special</span></div>
+              
+              <div class="col-sm-3"> <div class="square6">
+      
+            </div>
+          <span class="div-name">Other</span></div>
+            </div>
+            <br/>
+              <br/>
+      
+      <div *ngIf="showSeatMapDisable==true"  [dataSource]="newSeats">
+        <mat-grid-list cols="6" rowHeight="20" [gutterSize]="'10px'">
+              <div *ngFor="let tile of newSeats ; let i = index">
+      <!-- <mat-grid-tile id="status" (click)="changeStatus(tile)" [ngClass]="passengerTrueNull.includes(tile) ? 'true-null':'default' && passengerFalseNull.includes(tile) ? 'false-null':'default' && passengerTrueWheel.includes(tile) ? 'true-wheel':'default' && passengerFalseWheel.includes(tile) ? 'false-wheel':'default' && passengerTrueInfant.includes(tile) ? 'true-infant':'default' && passengerFalseInfant.includes(tile) ? 'false-infant':'default'"> {{newSeat[i]}}</mat-grid-tile> -->
+      <mat-grid-tile name="submitButton" #submitButton id="status" (click)="changeStatus(tile)" [ngClass]="veg.includes(tile) ? 'true-null':'default' && nonveg.includes(tile) ? 'false-null':'default' && special.includes(tile) ? 'true-infant':'default' && other.includes(tile) ? 'true-wheel':'default'"> {{newSeats[i]}}</mat-grid-tile>
+      </div>
+      
+      </mat-grid-list>
+      
+      
+      </div>
+      
+      </div>
+      </div>
+      </div>
+      </div>
+      <br/>
+      <br/>
+      
+
+
+      <div class="row">
+        <div class="col">
+            <app-passenger-services></app-passenger-services>
+        </div>
+        </div>
+      
+    
